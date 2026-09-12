@@ -1,0 +1,20 @@
+# Local configuration (DB credentials & admin password hash) — never commit this
+config.php
+
+# User-uploaded images
+uploads/*
+!uploads/.gitkeep
+
+# Generated ASCII-art files
+ascii/*
+!ascii/.gitkeep
+
+# PHP / server logs
+error_log
+*.log
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
