@@ -72,6 +72,3 @@ uploads/, ascii/      Runtime-generated content (git-ignored, kept via .gitkeep)
 - The admin password is stored as a bcrypt hash (`password_hash` / `password_verify`), not in plain text.
 - If you fork this project, treat `login.php` as a starting point only — for anything public-facing, consider adding rate limiting / CSRF protection on top.
 
-## License
-
-No license specified yet — add one (MIT, for example) if you plan to accept contributions or want to make the terms explicit.
