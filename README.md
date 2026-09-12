@@ -4,12 +4,29 @@ A lightweight personal blog engine built with plain PHP (PDO/MySQL) and vanilla 
 
 ## Features
 
-- Post feed with pinning, tag filtering, and per-post pages
+**Writing & content**
+- Posts support a lightweight markup of their own:
+  - `[IMAGE]` / `[IMAGE 2]` placeholders to position uploaded images inline in the text
+  - `[code lang]...[/code]` blocks, rendered with a language label and a monospaced code box
+  - `#hashtag` style tags, auto-extracted from the post body — no separate tag field
+- Multi-image upload per post, with an optional **ASCII-art render mode**: any uploaded image can be converted to a text-based ASCII rendering instead of being stored as-is
+- Reading-time estimate shown on each post
+- Pinning posts to the top of the feed
+
+**Reading experience**
+- Live client-side search across post titles/content on the feed page
+- Clickable tag chips that filter the feed by tag
+- Terminal-style "typing" animation when a post loads
+- Reading-progress bar
+- One-click "share as image" — snapshots the post with html2canvas and copies it to the clipboard
+
+**Engagement & stats**
 - Like / unlike posts (AJAX, one click, no reload)
-- View tracking (per-post and site-wide, deduplicated by IP for 30 minutes)
-- Multi-image uploads per post, with an optional **ASCII-art render mode** for images
-- Hashtag-style tags (`#php #linux`) auto-extracted from post content
-- Simple session-based admin panel (create / edit / delete posts, stats dashboard)
+- View tracking, both per-post and site-wide, de-duplicated by IP for 30 minutes so refreshing doesn't inflate counts
+- Admin stats dashboard: views today / yesterday / last 7 days / last 30 days / all-time, a 14-day views chart, total likes, and a per-post breakdown (views + likes) with a most-viewed ranking
+
+**Admin**
+- Simple session-based admin panel — create, edit, and delete posts from one screen
 - Clean URLs for posts (`/post/42`) via `.htaccess`
 
 ## Requirements
@@ -46,6 +63,14 @@ A lightweight personal blog engine built with plain PHP (PDO/MySQL) and vanilla 
 
 5. Visit `index.php` in your browser. Log in at `login.php` with the admin credentials you set in `config.php` to reach the admin panel.
 
+## Writing a post
+
+A couple of things worth knowing when writing content from the admin panel:
+
+- Drop `[IMAGE]` (for the first image) or `[IMAGE 2]`, `[IMAGE 3]`, etc. anywhere in the post text to place that image at that exact spot. Any image not referenced this way just isn't shown inline.
+- Wrap code with `[code php]your code here[/code]` — the word after `code` becomes the label shown above the block (`php`, `bash`, `js`, or anything you like).
+- Tags are just `#word` anywhere in the text — they're stripped from the visible text and rendered as clickable chips instead.
+
 ## Project structure
 
 ```
@@ -72,3 +97,6 @@ uploads/, ascii/      Runtime-generated content (git-ignored, kept via .gitkeep)
 - The admin password is stored as a bcrypt hash (`password_hash` / `password_verify`), not in plain text.
 - If you fork this project, treat `login.php` as a starting point only — for anything public-facing, consider adding rate limiting / CSRF protection on top.
 
+## License
+
+MIT — see [LICENSE](LICENSE).
